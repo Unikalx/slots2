@@ -51,9 +51,6 @@ class GameSpin extends Controller
             $weights = $this->GameLogic->renderWeights($linkedReels);
             $checkCountMoney = $this->GameLogic->checkCountMoney($minWin, $maxWin, $weights, $betDenomination, $betBetLevel, $betPrice, $bigWinResult, $i);
             if ($checkCountMoney == true) {
-                $this->Log->d('$minWin ' . $minWin);
-                $this->Log->d('$maxWin ' . $maxWin);
-                $this->Log->d('end ' . $i);
                 break;
             }
         }
@@ -68,7 +65,7 @@ class GameSpin extends Controller
         if ($bigWinResult == true) {
             $this->User->updateUserTransactionsInit($sessid, ($transactionsInit - $winMoney));
         }
-        $this->User->save($user, $balanceUser);
+        $this->User->save($user['uid'], $balanceUser);
 
         $spinArray = [
             'credit' => $credit['cents'],
@@ -143,7 +140,6 @@ class GameSpin extends Controller
         $balanceDiffPercentage = (($balance5game - $userBalance) / $balance5game) * 100;
 
         $factor = ($balanceDiffPercentage > 15) ? 1.5 : 1;
-
         if ($bigWinResult == true) {
             $priceWin['min'] = $bigWin;
             $priceWin['max'] = (($megaWin - $betPrice) > $diffBalanceWin) ? $diffBalanceWin : ($megaWin - $betPrice);

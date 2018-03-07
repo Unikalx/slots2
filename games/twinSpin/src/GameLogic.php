@@ -99,12 +99,11 @@ class GameLogic extends Controller
         foreach ($renderCheck as $key => $item) {
             $weightPrice = $this->weightsPrice[$key][$item['longVining']];
             $weightPrice = $weightPrice * $betBetLevel * $item['multiplier'];
-            $weightPriceCent = $this->MoneyManager->convertBalanceTwinSpin($weightPrice, $betDenomination)['cents'];
+            $weightPriceCent = $this->MoneyManager->convertBalance($weightPrice, $betDenomination)['denominBalance'];
             $total += $weightPriceCent;
         }
 
         $winMoney = $total / 100;
-        $this->Log->d('$winMoney '.$winMoney);
         if ($bigWinResult == true && $min <= $winMoney && $winMoney <= $max) {
             return true;
         }
@@ -112,7 +111,6 @@ class GameLogic extends Controller
             return true;
         }
         if ($bigWinResult == false && $num % 3 == 0 && $winMoney == 0) {
-            $this->Log->d('space');
             return true;
         }
         if ($num <= -10000 && $betPrice <= $winMoney && $winMoney <= $betPrice * 3) {
@@ -212,15 +210,15 @@ class GameLogic extends Controller
             $totalWinCoins += $weightPrice;
 
             $weightPriceCent = $this->MoneyManager->convertBalance($weightPrice, $denomination);
-
-            $totalWinCents += $weightPriceCent['cents'];
+            $totalWinCents += $weightPriceCent['denominBalance'];
 
             $arrCoins['ws.i' . $i . '.types.i0.wintype'] = 'coins';
             $arrCoins['ws.i' . $i . '.types.i0.coins'] = $weightPrice;
-            $arrCoins['ws.i' . $i . '.types.i0.cents'] = $weightPriceCent['cents'];
+            $arrCoins['ws.i' . $i . '.types.i0.cents'] = $weightPriceCent['denominBalance'];
             $i++;
             $wonCoins = array_merge($wonCoins, $arrCoins);
         }
+
         $wonCoins['totalwin.coins'] = $totalWinCoins;
         $wonCoins['totalwin.cent'] = $totalWinCents;
         return $wonCoins;
