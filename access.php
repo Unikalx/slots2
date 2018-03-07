@@ -55,7 +55,7 @@ if (isset($_SESSION['is_logged']) && $_SESSION['logged'] !== FALSE) {
     </style>
 </head>
 <body>
-<!--test-->
+<!--test2-->
     <? if ($access === TRUE) { ?>
         <? foreach ($users as $user) { ?>
 
