@@ -10,7 +10,7 @@ class Launcher
     function __construct()
     {
         $this->user = new User;
-        $this->log = new Logger;
+        $this->Log = new Logger;
     }
 
     public function startGame()
