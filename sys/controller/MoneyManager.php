@@ -21,19 +21,6 @@ class MoneyManager
         $this->betlevels = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     }
 
-    public function convertBalance($main, $denomination = null)
-    {
-        if ($denomination == null) $denomination = $this->denomination_standart;
-
-        if (in_array($denomination, $this->denominations)) {
-
-            $converted['coins'] = intval($main * 100 / $denomination);
-
-            $converted['cents'] = intval($main * 100);
-
-            return $converted;
-        }
-    }
 
     public function setDenomination($d)
     {
@@ -45,15 +32,15 @@ class MoneyManager
 
     }
 
-    public function setBetLevel($l)
+    public function setBetLevel($betBetLevel, $betDenomination = 1)
     {
-        $l = intval($l);
+        $betBetLevel = intval($betBetLevel);
 
-        if (in_array($l, $this->betlevels)) {
+        if (in_array($betBetLevel, $this->betlevels)) {
 
-            $result['betlevel'] = $l;
+            $result['betlevel'] = $betBetLevel;
 
-            $result['bet'] = $this->bet_standart * $l;
+            $result['bet'] = $this->bet_standart * $betBetLevel;
 
         } else {
 
@@ -62,6 +49,7 @@ class MoneyManager
             $result['bet'] = $this->bet_standart;
 
         }
+        $result['betPrice'] = 0.25 * $betDenomination * $betBetLevel;
 
         return $result;
     }
@@ -111,6 +99,20 @@ class MoneyManager
         $result['balance'] = $balance;
 
         return $result;
+    }
+
+    public function convertBalance($main, $denomination = null)
+    {
+        if ($denomination == null) $denomination = $this->denomination_standart;
+
+        if (in_array($denomination, $this->denominations)) {
+
+            $converted['coins'] = intval($main * 100 / $denomination);
+
+            $converted['cents'] = intval($main * 100);
+
+            return $converted;
+        }
     }
 
     public function convertBalanceTwinSpin($main, $denomination = null)
