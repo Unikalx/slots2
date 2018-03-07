@@ -5,11 +5,12 @@ require_once "controller/Logger.php";
 class Launcher
 {
     private $lang = 'en'; // en, tr
-    private $user;
+    private $User;
+    private $Log;
 
     function __construct()
     {
-        $this->user = new User;
+        $this->User = new User;
         $this->Log = new Logger;
     }
 
@@ -22,19 +23,19 @@ class Launcher
         if (!$method || $method != 'start' || !$uid || !$gameId) {
             return;
         }
-        $user = $this->user->getByUid($uid);
+        $user = $this->User->getByUid($uid);
 
         if (empty($user) || $user === FALSE) {
             header('HTTP/1.0 404 Not Found', true, 404);
         }
 
         $sessid = md5($gameId . $user['uid'] . time());
-        $resetSessions = $this->user->resetSessionStatuses($uid);
+        $resetSessions = $this->User->resetSessionStatuses($uid);
 
         if ($resetSessions !== TRUE) {
             return;
         }
-        $createSession = $this->user->createSession($uid, $sessid);
+        $createSession = $this->User->createSession($uid, $sessid);
         if ($createSession !== TRUE) {
             return;
         }
