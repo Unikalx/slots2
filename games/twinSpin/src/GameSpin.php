@@ -28,8 +28,7 @@ class GameSpin extends Controller
             $this->Log->e($request['action'] . ' bet_denomination or bet_betlevel or user is false');
             return print($this->Error->sendError(0));
         }
-        $betPrice = $this->betLevels($betBetLevel, $betDenomination);
-
+        $betPrice = $this->MoneyManager->setBetLevel($betBetLevel, $betDenomination)['betPrice'];
 
         $transactionsInit = $this->User->getUserTransactionsInit($sessid)['calculBigWin'];
 
@@ -164,12 +163,5 @@ class GameSpin extends Controller
         }
         $countGame = count($transactions);
         return $balance5game / $countGame;
-    }
-
-
-    /*Money*/
-    public function betLevels($betLevels, $denomination)
-    {
-        return 0.25 * $betLevels * $denomination;
     }
 }
