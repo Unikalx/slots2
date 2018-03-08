@@ -1,0 +1,440 @@
+{
+  "fullscreen": {
+    "global": "Game",
+    "platforms": ["mobile","mobileLow"],
+    "module": "Core.Fullscreen"
+  },
+  "stage": {
+    "global": "Game",
+    "module": "Game.Stage"
+  },
+  "postman": {
+    "global": "Services",
+    "module": "Core.Postman"
+  },
+  "autoPlayer": {
+    "module": "Core.AutoPlayer"
+  },
+  "netEntExtend": {
+    "global": "Services",
+    "module": "Core.NetEntExtend",
+    "model": "Core.Slots.NetEntExtendModel"
+  },
+  "netEntExtendEvents": {
+    "global": "Services",
+    "module": "Core.NetEntExtendEvents",
+    "model": "Core.Slots.NetEntExtendEventsModel"
+  },
+  "moneyManager": {
+    "global": "Services",
+    "module": "Core.MoneyManager"
+  },
+  "settingsManager": {
+    "global": "Services",
+    "module": "Core.SettingsManager"
+  },
+  "localStorageManager": {
+    "global": "Services",
+    "module": "Core.LocalStorageManager"
+  },
+  "customMessages": {
+    "module": "Core.CustomMessages",
+    "model": {
+      "desktop": "Core.CustomMessagesDesktopModel"
+    }
+  },
+  "keepAlive": {
+    "module": "Core.KeepAlive"
+  },
+  "playForRealPromo": {
+    "module": "Core.PlayForRealPromo",
+    "model": {
+      "desktop": "Core.PlayForRealPromoDesktopModel"
+    }
+  },
+  "dialogWindow": {
+    "module": "Core.DialogWindow",
+    "view": {
+      "mobile": "Core.DialogWindowMobileView",
+      "tablet": "Core.DialogWindowBaseView"
+    }
+  },
+  "errorManager": {
+    "global": "Game",
+    "module": "Core.ErrorManager",
+    "model": {
+      "desktop": "Core.ErrorManagerDesktopModel"
+    }
+  },
+  "playModeManager": {
+    "module": "Core.PlayModeManager"
+  },
+  "serverManager": {
+    "module": "Core.Slots.ServerManager"
+  },
+  "responseParser": {
+    "global": "Game",
+    "module": "Core.Slots.ResponseParser"
+  },
+  "background": {
+    "module": "TwinSpin.Background",
+    "controller": "TwinSpin.BackgroundController",
+    "view": {
+      "mobile":"TwinSpin.BackgroundView",
+      "desktop":"TwinSpin.BackgroundDesktopView"
+    }
+  },
+  "spin": {
+    "global": "Game",
+    "module": "Core.Slots.BufferedSpin",
+    "controller": "TwinSpin.BufferedSpinController",
+    "view":"TwinSpin.BufferedSpinView"
+
+  },
+  "spinButton": {
+    "module": "Interface.Slots.SpinButton",
+    "controller": "TwinSpin.SpinButtonController",
+    "view": {
+      "mobile": "Interface.Slots.SpinButtonMobileView",
+      "tablet": "Interface.Slots.SpinButtonTabletView",
+      "desktop": "TwinSpin.SpinButtonDesktopView"
+    },
+    "model": "TwinSpin.SpinButtonModel"
+  },
+  "maxBetButton": {
+    "platforms": ["desktop"],
+    "controller": "TwinSpin.MaxButtonController",
+    "module": "Interface.Slots.MaxBetButton",
+    "view": "TwinSpin.MaxBetButtonBaseView",
+    "model": "TwinSpin.MaxBetButtonModel"
+  },
+  "quickSettingsMenu": {
+    "platforms": ["mobile", "mobileLow", "tablet", "tabletLow"],
+    "module": "Interface.QuickSettingsMenu",
+    "view": {
+      "mobile": "Interface.QuickSettingsMenuBaseView",
+      "tablet": "Interface.QuickSettingsMenuTabletView"
+    }
+  },
+  "autoPlayButton": {
+    "platforms":  ["mobile", "mobileLow", "tablet", "tabletLow"],
+    "module": "Interface.AutoPlayButton"
+  },
+  "quickSpinButton": {
+    "platforms":  ["mobile", "mobileLow", "tablet", "tabletLow"],
+    "module": "Interface.QuickSpinButton"
+  },
+  "resourceLoader": {
+    "module": "Core.ResourceLoader"
+  },
+  "spinTypeBasic": {
+    "module": "Core.Slots.SpinTypeBasic"
+  },
+  "quickStopper": {
+    "module": "Game.Slots.QuickStopper",
+    "view": "TwinSpin.QuickStopperView"
+  },
+  "winSituationsDisplay": {
+    "module": "Game.Slots.WinSituationsDisplay"
+  },
+  "winSituations": {
+    "module": "Game.Slots.WinSituations",
+    "controller": "TwinSpin.WinSituationsController",
+    "model": "TwinSpin.WinSituationsModel",
+    "view":{
+      "desktop": "TwinSpin.WinSituationsDesktopView",
+      "mobile": "TwinSpin.WinSituationsView"
+    }
+  },
+  "winBanner": {
+    "module": "Game.Slots.WinBanner",
+    "controller": "TwinSpin.WinBannerController",
+    "view": {
+      "mobile": "TwinSpin.WinBannerView",
+      "desktop": "TwinSpin.WinBannerDesktopView"
+    }
+  },
+  "stopGame": {
+    "module": "Core.StopGame"
+  },
+  "realityCheck": {
+    "module": "Core.Slots.RealityCheck",
+    "model": {
+      "desktop": "Core.RealityCheckDesktopModel"
+    }
+  },
+  "coinWin": {
+    "module": "Game.Slots.CoinWin",
+    "model" : "TwinSpin.CoinWinModel",
+    "view": {
+      "mobile": "TwinSpin.CoinWinView",
+      "desktop": "TwinSpin.CoinWinDesktopView"
+    }
+  },
+  "dimmedNoWinSymbols": {
+    "module": "Game.Slots.DimmedNoWinSymbols"
+  },
+  "winningSymbols": {
+    "module": "Game.Slots.WinningSymbols",
+    "controller": "TwinSpin.WinningSymbolsController",
+    "model": "TwinSpin.WinningSymbolsModel",
+    "view":"TwinSpin.WinningSymbolsView"
+  },
+  "standardWin": {
+    "module": "Core.Slots.StandardWin",
+    "controller": "TwinSpin.StandardWinController",
+    "model": "TwinSpin.StandardWinModel"
+  },
+  "bigWin": {
+    "module": "Game.Slots.BigWin",
+    "view": {
+      "desktop": "TwinSpin.BigWinDesktopView",
+      "mobile": "TwinSpin.BigWinView"
+    },
+    "model": "TwinSpin.BigWinModel",
+    "controller": "TwinSpin.BigWinController"
+
+  },
+  "bigWinCountUp": {
+    "module": "Game.Slots.BigWinCountUp",
+    "controller": "TwinSpin.BigWinCountUpController",
+    "view": {
+      "desktop": "TwinSpin.BigWinCountUpDesktopView",
+      "mobile": "TwinSpin.BigWinCountUpView"
+    }
+  },
+  "JMX": {
+    "optional": true,
+    "module": "Cheats.JMX",
+    "controller": "TwinSpin.JMXController"
+  },
+  "JMXQueueViewer": {
+    "optional": true,
+    "module": "Cheats.JMXQueueViewer"
+  },
+  "DebugInformation": {
+    "optional": true,
+    "module": "Cheats.DebugInformation"
+  },
+  "g4": {
+    "global": "Game",
+    "module": "Core.G4",
+    "model": {
+      "desktop": "Core.G4DesktopModel"
+    }
+  },
+  "slowRequestAnimation": {
+    "module": "Core.SlowRequestAnimation",
+    "view": {
+      "desktop": "Core.SlowRequestAnimationDesktopView"
+    }
+  },
+  "ambienceManager": {
+    "module": "Game.AmbienceManager"
+  },
+  "audioPlayer": {
+    "global": "Game",
+    "module": "Core.Audio.AudioPlayer"
+  },
+  "homeButton": {
+    "platforms":  ["mobile", "mobileLow", "tablet", "tabletLow"],
+    "module": "Interface.HomeButton",
+    "view": {
+      "mobile": "Interface.HomeButtonMobileView",
+      "tablet": "Interface.HomeButtonTabletView"
+    }
+  },
+  "soundOnOffButton": {
+    "platforms":  ["mobile", "mobileLow", "tablet", "tabletLow"],
+    "module": "Interface.SoundOnOffButton",
+    "view": {
+      "mobile": "Interface.SoundOnOffButtonMobileView",
+      "tablet": "Interface.SoundOnOffButtonTabletView"
+    }
+  },
+  "balanceDisplay": {
+    "module": "Interface.BalanceDisplay",
+    "view": {
+      "desktop": "Interface.BalanceDisplayDesktopView",
+      "mobile": "Interface.BalanceDisplayMobileView",
+      "tablet": "Interface.BalanceDisplayBaseView"
+    }
+  },
+  "coinsField": {
+    "module": "Interface.Slots.CoinsField",
+    "view": {
+      "mobile": "Interface.Slots.CoinsFieldMobileView",
+      "tablet": "Interface.Slots.CoinsFieldBaseView",
+      "desktop": "TwinSpin.CoinsFieldDesktopView"
+    },
+    "controller" : "TwinSpin.CoinsFieldController",
+    "model" : "TwinSpin.CoinsFieldModel"
+  },
+  "cashField": {
+    "module": "Interface.CashField",
+    "view": {
+      "desktop": "Interface.CashFieldDesktopView",
+      "mobile": "Interface.CashFieldMobileView",
+      "tablet": "Interface.CashFieldTabletView"
+    }
+  },
+  "coinsFieldCountUp": {
+    "module": "Core.AbstractCountUp"
+  },
+  "idleSymbolAnimation":{
+    "platforms": ["desktop"],
+    "module" : "TwinSpin.IdleSymbolAnimation"
+  },
+  "settingsWindow": {
+    "module": "Interface.SettingsWindow",
+    "view": {
+      "mobile": "Interface.SettingsWindowMobileView",
+      "tablet": "Interface.SettingsWindowTabletView",
+      "desktop": "TwinSpin.SettingsWindowDesktopView"
+    }
+  },
+  "settingsMenu": {
+    "platforms": ["mobile", "tablet", "mobileLow", "tabletLow"],
+    "module": "Interface.SettingsMenu",
+    "view": {
+      "mobile": "Interface.SettingsMenuMobileView",
+      "tablet": "Interface.SettingsMenuTabletView"
+    }
+  },
+  "desktopSettingsMenu": {
+    "platforms": ["desktop"],
+    "module": "Interface.DesktopSettingsMenu"
+  },
+  "settingsButton": {
+    "platforms":  ["mobile", "mobileLow", "tablet", "tabletLow"],
+    "module": "Interface.SettingsButton",
+    "view": {
+      "mobile": "Interface.SettingsButtonMobileView",
+      "tablet": "Interface.SettingsButtonTabletView"
+    }
+  },
+  "betSettings": {
+    "module": "Interface.BetSettings",
+    "controller":"TwinSpin.BetSettingsController",
+    "view": {
+      "mobile": "Interface.BetSettingsBaseView",
+      "tablet": "Interface.BetSettingsBaseView",
+      "desktop": "TwinSpin.BetSettingsDesktopView"
+    }
+  },
+  "systemClock": {
+    "module": "Interface.SystemClock",
+    "view": {
+      "mobile": "Interface.SystemClockBaseView",
+      "tablet": "Interface.SystemClockTabletView",
+      "desktop": "Interface.SystemClockDesktopView"
+    }
+  },
+  "netEntLogo": {
+    "platforms":  ["mobile", "mobileLow", "tablet", "tabletLow"],
+    "module": "Interface.NetEntLogo"
+  },
+  "gameHistory": {
+    "platforms":  ["mobile", "mobileLow", "tablet", "tabletLow"],
+    "module": "Interface.GameHistory",
+    "view": {
+      "mobile": "Interface.GameHistoryBaseView",
+      "tablet": "Interface.GameHistoryBaseView"
+    }
+  },
+  "gameRules": {
+    "module": "Interface.GameRules",
+    "controller": "TwinSpin.GameRulesController",
+    "view": {
+      "mobile": "Interface.GameRulesBaseView",
+      "tablet": "Interface.GameRulesBaseView",
+      "desktop": "TwinSpin.GameRulesDesktopView"
+    }
+  },
+  "paytable": {
+    "module": "Interface.Paytable",
+    "controller": "TwinSpin.PaytableController",
+    "view": {
+      "mobile": "Interface.PaytableBaseView",
+      "desktop": "TwinSpin.PaytableDesktopView"
+    }
+  },
+
+  "spinSettings": {
+    "platforms":  ["mobile", "mobileLow", "tablet", "tabletLow"],
+    "module": "Interface.SpinSettings",
+    "view": "TwinSpin.SpinSettingsView"
+  },
+  "autoplaySettings": {
+    "platforms": ["desktop"],
+    "module": "Interface.AutoplaySettings",
+    "controller" : "TwinSpin.AutoplaySettingsController",
+    "view": "TwinSpin.AutoplaySettingsView"
+  },
+  "gameSettings": {
+    "platforms": ["desktop"],
+    "module": "Interface.GameSettings",
+    "view": {
+      "desktop": "Interface.GameSettingsDesktopView"
+    }
+  },
+  "soundSettings": {
+    "module": "Interface.SoundSettings",
+    "view": {
+      "mobile": "Interface.SoundSettingsBaseView",
+      "tablet": "Interface.SoundSettingsBaseView",
+      "desktop": "Interface.SoundSettingsDesktopView"
+    }
+  },
+  "keyboardManager": {
+    "module": "Core.KeyboardManager"
+  },
+  "freeRounds": {
+    "module": "Core.Slots.FreeRounds"
+  },
+  "logo": {
+    "global": "Game",
+    "module": "Game.Logo",
+    "view":{
+      "mobile": "TwinSpin.LogoView",
+      "desktop": "TwinSpin.LogoDesktopView"
+    }
+  },
+  "linkedReels": {
+    "module": "TwinSpin.LinkedReels",
+    "view": {
+      "mobile": "TwinSpin.LinkedReelsView",
+      "desktop": "TwinSpin.LinkedReelsDesktopView"
+    }
+  },
+  "ticker": {
+    "platforms": ["mobile", "mobileLow", "tablet", "tabletLow"],
+    "module": "Interface.Ticker",
+    "view": "Interface.TickerMobileView"
+  },
+  "pluginMenu": {
+    "platforms": ["mobile", "mobileLow", "tablet", "tabletLow"],
+    "module": "Integration.PluginMenu",
+    "view": {
+      "mobile": "Integration.PluginMenuMobileView",
+      "tablet": "Integration.PluginMenuBaseView"
+    }
+  },
+  "Splash": {
+    "platforms": ["desktop"],
+    "module": "TwinSpin.Splash"
+  },
+  "keyboard": {
+    "platforms": ["mobile", "mobileLow", "tablet", "tabletLow"],
+    "module": "Interface.Keyboard"
+  },
+  "bonusMessage": {
+    "module": "Core.BonusMessage"
+  },
+  "bonusProgramWidget": {
+    "module": "Game.BonusProgramWidget"
+  },
+  "disclaimer": {
+    "module": "Integration.Disclaimer"
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "clips": {"main": {
+    "bigWinText": {"volume": 0.7},
+    "reelTwinEndSnd": {"volume": 0.9},
+    "bigWinStart": {"volume": 0.7},
+    "buttonClick": {"volume": 0.9},
+    "bigWinLoop": {
+      "volume": 0.9,
+      "duck": {"ambienceGeneral": {
+        "attack": 0.01,
+        "release": 1,
+        "value": 0
+      }}
+    },
+    "quickStop": {"volume": 0.5},
+    "countUpLoopEnd": {"volume": 1},
+    "smallWin": {"volume": 1},
+    "reelTwin2Snd": {"volume": 0.9},
+    "countUpLoop": {"volume": 1},
+    "reelSpin": {"volume": 0.9},
+    "reelTwin3Snd": {
+      "volume": 0.9,
+      "duck": {"ambienceGeneral": {
+        "attack": 0.2,
+        "release": 0.5,
+        "value": 0
+      }}
+    },
+    "ambienceGeneral": {"volume": 0.9},
+    "reelTwinQuickStop": {"volume": 1},
+    "reelBounce": {"volume": 0.9},
+    "spinButtonClick": {"volume": 0.9},
+    "reelTwin4Snd": {
+      "volume": 0.9,
+      "duck": {"ambienceGeneral": {
+        "attack": 0.01,
+        "release": 0.5,
+        "value": 0
+      }}
+    },
+    "reelTwin5Snd": {
+      "volume": 0.9,
+      "duck": {"ambienceGeneral": {
+        "attack": 0.01,
+        "release": 0.01,
+        "value": 0
+      }}
+    },
+    "mediumWin": {"volume": 1},
+    "paytableButton": {"volume": 0.9},
+    "bigWinEnd": {
+      "volume": 0.9,
+      "duck": {"ambienceGeneral": {
+        "duration": 1,
+        "attack": 0.01,
+        "release": 1,
+        "value": 0
+      }}
+    },
+    "largeWin": {"volume": 1}
+  }},
+  "files": {"main": {
+    "bigWinText": "multimedia/audio/webAudio/main/ogg/bigWinText.ogg",
+    "reelTwinEndSnd": "multimedia/audio/webAudio/main/ogg/reelTwinEndSnd.ogg",
+    "bigWinStart": "multimedia/audio/webAudio/main/ogg/bigWinStart.ogg",
+    "buttonClick": "multimedia/audio/webAudio/main/ogg/buttonClick.ogg",
+    "bigWinLoop": "multimedia/audio/webAudio/main/ogg/bigWinLoop.ogg",
+    "quickStop": "multimedia/audio/webAudio/main/ogg/quickStop.ogg",
+    "countUpLoopEnd": "multimedia/audio/webAudio/main/ogg/countUpLoopEnd.ogg",
+    "smallWin": "multimedia/audio/webAudio/main/ogg/smallWin.ogg",
+    "reelTwin2Snd": "multimedia/audio/webAudio/main/ogg/reelTwin2Snd.ogg",
+    "countUpLoop": "multimedia/audio/webAudio/main/ogg/countUpLoop.ogg",
+    "reelSpin": "multimedia/audio/webAudio/main/ogg/reelSpin.ogg",
+    "reelTwin3Snd": "multimedia/audio/webAudio/main/ogg/reelTwin3Snd.ogg",
+    "ambienceGeneral": "multimedia/audio/webAudio/main/ogg/ambienceGeneral.ogg",
+    "reelTwinQuickStop": "multimedia/audio/webAudio/main/ogg/reelTwinQuickStop.ogg",
+    "reelBounce": "multimedia/audio/webAudio/main/ogg/reelBounce.ogg",
+    "spinButtonClick": "multimedia/audio/webAudio/main/ogg/spinButtonClick.ogg",
+    "reelTwin4Snd": "multimedia/audio/webAudio/main/ogg/reelTwin4Snd.ogg",
+    "reelTwin5Snd": "multimedia/audio/webAudio/main/ogg/reelTwin5Snd.ogg",
+    "mediumWin": "multimedia/audio/webAudio/main/ogg/mediumWin.ogg",
+    "paytableButton": "multimedia/audio/webAudio/main/ogg/paytableButton.ogg",
+    "bigWinEnd": "multimedia/audio/webAudio/main/ogg/bigWinEnd.ogg",
+    "largeWin": "multimedia/audio/webAudio/main/ogg/largeWin.ogg"
+  }},
+  "fileSizes": {"main": {
+    "bigWinText": 48711,
+    "reelTwinEndSnd": 29934,
+    "bigWinStart": 58122,
+    "buttonClick": 12068,
+    "bigWinLoop": 325494,
+    "quickStop": 13846,
+    "countUpLoopEnd": 25514,
+    "smallWin": 30458,
+    "reelTwin2Snd": 23958,
+    "countUpLoop": 147318,
+    "reelSpin": 22167,
+    "reelTwin3Snd": 56063,
+    "ambienceGeneral": 900716,
+    "reelTwinQuickStop": 19438,
+    "reelBounce": 6280,
+    "spinButtonClick": 20264,
+    "reelTwin4Snd": 69808,
+    "reelTwin5Snd": 80996,
+    "mediumWin": 43977,
+    "paytableButton": 12397,
+    "bigWinEnd": 39452,
+    "largeWin": 48274
+  }}
+}
