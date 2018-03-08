@@ -20,34 +20,34 @@ class Transaction
     {
         $paramsJson = json_encode($params);
 
-        $sql = ' INSERT INTO `neon_transactions` ( uid, sessid, action, betlevel, denomination, bet, total_win_coins, total_win_cents, total_amount, balance, params, type ) '.
-                ' VALUES (:uid, :sessid, :action, :betlevel, :denomination, :bet, :total_win_coins, :total_win_cents, :total_amount, :balance, :params, :type ) ';
+        $sql = ' INSERT INTO `neon_transactions` ( uid, sessid, action, betlevel, denomination, bet, total_win_coins, total_win_cents, total_amount, balance, params, type ) ' .
+            ' VALUES (:uid, :sessid, :action, :betlevel, :denomination, :bet, :total_win_coins, :total_win_cents, :total_amount, :balance, :params, :type ) ';
         $stmt = $this->db->prepare($sql);
 
-        $stmt->bindParam(':uid',                $uid, PDO::PARAM_INT);
-        $stmt->bindParam(':sessid',             $sessid, PDO::PARAM_STR);
-        $stmt->bindParam(':action',             $action, PDO::PARAM_STR);
-        $stmt->bindParam(':betlevel',           $betLevel, PDO::PARAM_INT);
-        $stmt->bindParam(':denomination',       $d, PDO::PARAM_INT);
-        $stmt->bindParam(':bet',                $bet, PDO::PARAM_INT);
-        $stmt->bindParam(':total_win_coins',    $totalWinCoins, PDO::PARAM_INT);
-        $stmt->bindParam(':total_win_cents',    $totalWinCents, PDO::PARAM_INT);
-        $stmt->bindParam(':total_amount',       $totalAmount, PDO::PARAM_INT);
-        $stmt->bindParam(':balance',            $balance, PDO::PARAM_INT);
-        $stmt->bindParam(':params',             $paramsJson, PDO::PARAM_STR);
-        $stmt->bindParam(':type',               $type, PDO::PARAM_STR);
+        $stmt->bindParam(':uid', $uid, PDO::PARAM_INT);
+        $stmt->bindParam(':sessid', $sessid, PDO::PARAM_STR);
+        $stmt->bindParam(':action', $action, PDO::PARAM_STR);
+        $stmt->bindParam(':betlevel', $betLevel, PDO::PARAM_INT);
+        $stmt->bindParam(':denomination', $d, PDO::PARAM_INT);
+        $stmt->bindParam(':bet', $bet, PDO::PARAM_INT);
+        $stmt->bindParam(':total_win_coins', $totalWinCoins, PDO::PARAM_INT);
+        $stmt->bindParam(':total_win_cents', $totalWinCents, PDO::PARAM_INT);
+        $stmt->bindParam(':total_amount', $totalAmount, PDO::PARAM_INT);
+        $stmt->bindParam(':balance', $balance, PDO::PARAM_INT);
+        $stmt->bindParam(':params', $paramsJson, PDO::PARAM_STR);
+        $stmt->bindParam(':type', $type, PDO::PARAM_STR);
 
-        if ( $stmt->execute() ) return TRUE;
+        if ($stmt->execute()) return TRUE;
         else {
-            
+
             $this->Log->e($action . ' transaction was not saved ##### code: ' . $stmt->errorInfo()[0] . ' - ' . $stmt->errorInfo()[2]);
-            
-            return FALSE; 
+
+            return FALSE;
 
         }
     }
 
-    /*twinspin_transactions*/
+    /*twinSpinTransactions*/
     public function saveTransaction($saveTransaction)
     {
         $sql = ' INSERT INTO `twinspin_transactions` (uid, sessid, action, bet, betlevel, playerBalanceCents, playerBalanceCoins, denomination, preCombination, totalWinCents, totalWinCoins,  balance, calculBigWin) ' .
@@ -69,6 +69,7 @@ class Transaction
 
         return ($stmt->execute()) ? TRUE : FALSE;
     }
+
     public function getUserTransactionsInit($sessid)
     {
         $sql = "SELECT t.calculBigWin FROM `twinspin_transactions` AS t JOIN `twinspin_user_sessions` AS s_user_sess ON t.uid = s_user_sess.uid WHERE t.sessid=:sessid AND s_user_sess.status = 1 AND `action` = 'init' ORDER by t.id DESC Limit 1";
@@ -78,6 +79,7 @@ class Transaction
 
         return ($stmt->execute()) ? $stmt->fetch() : FALSE;
     }
+
     public function updateUserTransactionsInit($sessid, $calculBigWin)
     {
         $sql = "UPDATE `twinspin_transactions` SET calculBigWin=:calculBigWin WHERE sessid=:sessid AND `action` = 'init' ORDER BY id DESC LIMIT 1";
@@ -86,6 +88,7 @@ class Transaction
         $stmt->bindParam(':calculBigWin', $calculBigWin, PDO::PARAM_INT);
         return ($stmt->execute()) ? TRUE : FALSE;
     }
+
     public function getUserTransactionsSpin($sessid)
     {
         $result = [];
@@ -98,5 +101,5 @@ class Transaction
         }
         return ($result == []) ? false : $result;
     }
-    /*end_twinspin_transactions*/
+    /*endTwinSpinTransactions*/
 }
