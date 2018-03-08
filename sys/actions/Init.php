@@ -42,8 +42,12 @@ class Init extends Controller
         }
         $initResponse = include('config/' . $gameId . '/init.config.php');
 
+        $initResponse['playercurrencyiso'] = $user['playercurrency'];
+        $initResponse['jackpotcurrencyiso'] = $user['playercurrency'];
+        $initResponse['jackpotcurrency'] = $user['playercurrency'];
+        $initResponse['playercurrency'] = $user['playercurrency'];
         $initResponse['gamesoundurl'] = $gameId;
-        $initResponse['staticsharedurl'] = "http://gaming-soft.info/slots/games/' . $gameId . '";
+        $initResponse['staticsharedurl'] = "http://gaming-soft.info/slots/games/".$gameId."/game/current";
         $initResponse['credit'] = $convertedBalance['cents'];
 
         return print(http_build_query($initResponse));
