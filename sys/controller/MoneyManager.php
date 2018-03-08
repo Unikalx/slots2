@@ -3,14 +3,14 @@ require_once "Logger.php";
 
 class MoneyManager
 {
-    public $denomination_standart = 5;
+    public $denominationStandard = 5;
     public $denominations;
 
-    public $betlevel_standart = 1;
-    public $betlevels;
+    public $betLevelStandard = 1;
+    public $betLevels;
 
-//    public $bet_standart = 20;
-    public $bet_standart = 25;
+//    public $betStandard = 20;
+    public $betStandard = 25;
 
     public $Log;
 
@@ -19,7 +19,7 @@ class MoneyManager
         $this->Log = new Logger;
 
         $this->denominations = [1, 2, 5, 10, 20, 50];
-        $this->betlevels = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        $this->betLevels = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     }
 
 
@@ -27,19 +27,19 @@ class MoneyManager
     {
         $d = intval($d);
         if (in_array($d, $this->denominations)) return $d;
-        else return $this->denomination_standart;
+        else return $this->denominationStandard;
     }
 
     public function setBetLevel($betBetLevel, $betDenomination = 1)
     {
         $betBetLevel = intval($betBetLevel);
 
-        if (in_array($betBetLevel, $this->betlevels)) {
+        if (in_array($betBetLevel, $this->betLevels)) {
             $result['betlevel'] = $betBetLevel;
-            $result['bet'] = $this->bet_standart * $betBetLevel;
+            $result['bet'] = $this->betStandard * $betBetLevel;
         } else {
-            $result['betlevel'] = $this->betlevel_standart;
-            $result['bet'] = $this->bet_standart;
+            $result['betlevel'] = $this->betLevelStandard;
+            $result['bet'] = $this->betStandard;
         }
         $result['betPrice'] = 0.25 * $betDenomination * $betBetLevel;
         return $result;
@@ -81,7 +81,7 @@ class MoneyManager
 
     public function convertBalance($main, $denomination = null)
     {
-        if ($denomination == null) $denomination = $this->denomination_standart;
+        if ($denomination == null) $denomination = $this->denominationStandard;
         if (in_array($denomination, $this->denominations)) {
             $converted['coins'] = intval($main * 100 / $denomination);
             $converted['cents'] = intval($main * 100);
