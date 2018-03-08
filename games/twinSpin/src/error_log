@@ -1,0 +1,6 @@
+[23-Feb-2018 16:42:45 Europe/Kiev] PHP Warning:  Invalid argument supplied for foreach() in /home/gamingsoft/public_html/netent/twinSpin/src/actions/Spin.php on line 171
+[23-Feb-2018 16:42:45 Europe/Kiev] PHP Warning:  Division by zero in /home/gamingsoft/public_html/netent/twinSpin/src/actions/Spin.php on line 153
+[07-Mar-2018 08:48:40 UTC] PHP Warning:  require_once(models/User.php): failed to open stream: No such file or directory in /home/gamingsoft/public_html/slots/sys/controller/Controller.php on line 5
+[07-Mar-2018 08:48:40 UTC] PHP Fatal error:  require_once(): Failed opening required 'models/User.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/gamingsoft/public_html/slots/sys/controller/Controller.php on line 5
+[07-Mar-2018 08:51:02 UTC] PHP Warning:  require_once(models/User.php): failed to open stream: No such file or directory in /home/gamingsoft/public_html/slots/sys/controller/Controller.php on line 5
+[07-Mar-2018 08:51:02 UTC] PHP Fatal error:  require_once(): Failed opening required 'models/User.php' (include_path='.:/opt/cpanel/ea-php56/root/usr/share/pear') in /home/gamingsoft/public_html/slots/sys/controller/Controller.php on line 5
