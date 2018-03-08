@@ -21,6 +21,11 @@ class PayTable extends Controller
         $convertedBalance = $this->MoneyManager->convertBalance($user['balance']);
 
         $payTableResponse = include('config/' . $gameId . '/payTable.config.php');
+
+        $payTableResponse['playercurrencyiso'] = $user['playercurrency'];
+        $payTableResponse['jackpotcurrencyiso'] = $user['playercurrency'];
+        $payTableResponse['jackpotcurrency'] = $user['playercurrency'];
+        $payTableResponse['playercurrency'] = $user['playercurrency'];
         $payTableResponse['credit'] = $convertedBalance['cents'];
         $payTableResponse['gamesoundurl'] = 'gamesoundurl';
 
