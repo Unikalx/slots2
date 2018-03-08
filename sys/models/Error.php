@@ -1,14 +1,9 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: RedSoft_2
- * Date: 07.03.2018
- * Time: 10:37
- */
 
 class Error
 {
     private $errors;
+
     function __construct()
     {
 
@@ -19,6 +14,7 @@ class Error
             20 => 'SESSION_TIMEOUT',
         ];
     }
+
     public function sendError($code, $error = null)
     {
         $response = [
