@@ -16,6 +16,7 @@ class Spin extends Controller
         $gameId = $request['gameId'];
         require_once '../games/' . $gameId . '/src/GameSpin.php';
         $GameSpin = new GameSpin;
-        return $GameSpin->Spin($request);
+
+        return print(urldecode(http_build_query($GameSpin->Spin($request))));
     }
 }

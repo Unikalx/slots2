@@ -131,7 +131,7 @@ class GameSpin extends Controller
             $this->Log->e($request['action'] . ' transaction was not saved');
             return print($this->Error->sendError(0));
         }
-        return print(urldecode(http_build_query($response)));
+        return $response;
     }
 
     private function priceWin($sessid, $bigWinResult, $bigWin, $megaWin, $betPrice, $diffBalanceWin, $userBalance)
