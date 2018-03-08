@@ -79,6 +79,7 @@ class MoneyManager
         return $result;
     }
 
+
     public function convertBalance($main, $denomination = null)
     {
         if ($denomination == null) $denomination = $this->denomination_standart;
