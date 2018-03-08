@@ -6,7 +6,7 @@ require_once "DatabaseConnection.php";
 class User
 {
     private $db;
-    private $log;
+    private $Log;
 
     function __construct()
     {
@@ -14,7 +14,7 @@ class User
 
         $this->db = $dbClass->db;
 
-        $this->log = new Logger;
+        $this->Log = new Logger;
     }
 
     public function test()
@@ -32,7 +32,7 @@ class User
         if ($stmt->execute()) return $stmt->fetch();
         else {
 
-            $this->log->e('##### code: ' . $stmt->errorInfo()[0] . ' - ' . $stmt->errorInfo()[2]);
+            $this->Log->e('##### code: ' . $stmt->errorInfo()[0] . ' - ' . $stmt->errorInfo()[2]);
 
             return FALSE;
 
@@ -50,7 +50,7 @@ class User
         if ($stmt->execute()) return $stmt->fetch();
         else {
 
-            $this->log->e('uid - ' . $uid . ' ##### code: ' . $stmt->errorInfo()[0] . ' - ' . $stmt->errorInfo()[2]);
+            $this->Log->e('uid - ' . $uid . ' ##### code: ' . $stmt->errorInfo()[0] . ' - ' . $stmt->errorInfo()[2]);
 
             return FALSE;
 
@@ -66,7 +66,7 @@ class User
         if ($update->execute()) return TRUE;
         else {
 
-            $this->log->e('uid - ' . $uid . ' session statuses weren\'t nulled ##### code: ' . $update->errorInfo()[0] . ' - ' . $update->errorInfo()[2]);
+            $this->Log->e('uid - ' . $uid . ' session statuses weren\'t nulled ##### code: ' . $update->errorInfo()[0] . ' - ' . $update->errorInfo()[2]);
 
             return FALSE;
 
@@ -84,7 +84,7 @@ class User
         if ($result->execute()) return TRUE;
         else {
 
-            $this->log->e('uid - ' . $uid . ' session id wasn\'t inserted to db ##### code: ' . $result->errorInfo()[0] . ' - ' . $result->errorInfo()[2]);
+            $this->Log->e('uid - ' . $uid . ' session id wasn\'t inserted to db ##### code: ' . $result->errorInfo()[0] . ' - ' . $result->errorInfo()[2]);
 
             return FALSE;
 
@@ -102,7 +102,7 @@ class User
         if ($stmt->execute()) return TRUE;
         else {
 
-            $this->log->e($uid . ' - user was not updated ##### code: ' . $stmt->errorInfo()[0] . ' - ' . $stmt->errorInfo()[2]);
+            $this->Log->e($uid . ' - user was not updated ##### code: ' . $stmt->errorInfo()[0] . ' - ' . $stmt->errorInfo()[2]);
 
             return FALSE;
 
