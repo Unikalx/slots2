@@ -38,7 +38,6 @@ class GameSpin extends Controller
         $megaWin = $this->GameLogic->megaWin * ($betDenomination * 2) * $betBetLevel;
         $bigWinResult = ($bigWin < $diffBalanceWin) ? $this->GameLogic->winPercent() : false;
 
-
         $priceWin = $this->priceWin($sessid, $bigWinResult, $bigWin, $megaWin, $betPrice, $diffBalanceWin, $user['balance']);
         $minWin = $priceWin['min'];
         $maxWin = $priceWin['max'];
@@ -54,11 +53,13 @@ class GameSpin extends Controller
                 break;
             }
         }
+
         $renderWin = $this->GameLogic->renderWin($weights);
         $positionsWin = $this->GameLogic->positionsWin($renderWin);
         $winCoins = $this->GameLogic->winCoins($renderWin, $betDenomination, $betBetLevel);
+
         $winMoney = ($winCoins['totalwin.cent'] / 100);
-        $balanceUser = $user['balance'] + $winMoney - $betPrice;
+        $balanceUser = $this->MoneyManager->changeBalance(($user['balance'] + $winMoney), $betBetLevel, $betDenomination)['balance'];
 
         $credit = $this->MoneyManager->convertBalance($balanceUser);
 
@@ -106,7 +107,6 @@ class GameSpin extends Controller
             'gameover' => 'true',
             'gamestate.stack' => 'basic',
             'wavecount' => '1',
-
         ];
 
         $response = array_merge($positionsWin, $spinArray, $winCoins);
