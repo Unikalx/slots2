@@ -19,9 +19,9 @@ class ReloadBalance extends Controller
         $convertedBalance = $this->MoneyManager->convertBalance($user['balance']);
 
         $response = [
-            'playercurrencyiso' => 'EUR',
+            'playercurrencyiso' => $user['playercurrency'],
             'clientaction' => $request['action'],
-            'playercurrency' => '€',
+            'playercurrency' => $user['playercurrency'],
             'credit' => $convertedBalance['cents']
         ];
         return print(urldecode(http_build_query($response)));
