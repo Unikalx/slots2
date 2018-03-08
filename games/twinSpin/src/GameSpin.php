@@ -24,13 +24,13 @@ class GameSpin extends Controller
         $betBetLevel = $request['bet_betlevel'];
 
         $user = $this->User->getUserBySession($sessid);
-        if (!$betDenomination || !$betBetLevel || $user === FALSE) {
-            $this->Log->e($request['action'] . ' bet_denomination or bet_betlevel or user is false');
+        if (!$betDenomination || !$betBetLevel || $user === FALSE || !in_array($_REQUEST['gameId'], $this->gameIdArray)) {
+            $this->Log->e($request['action'] . ' bet_denomination or bet_betlevel or user or gameIdArray is false');
             return print($this->Error->sendError(0));
         }
         $betPrice = $this->MoneyManager->setBetLevel($betBetLevel, $betDenomination)['betPrice'];
 
-        $transactionsInit = $this->User->getUserTransactionsInit($sessid)['calculBigWin'];
+        $transactionsInit = $this->Transaction->getUserTransactionsInit($sessid)['calculBigWin'];
 
         $diffBalanceWin = $transactionsInit - $user['balance'];
 
@@ -64,7 +64,7 @@ class GameSpin extends Controller
         $credit = $this->MoneyManager->convertBalance($balanceUser);
 
         if ($bigWinResult == true) {
-            $this->User->updateUserTransactionsInit($sessid, ($transactionsInit - $winMoney));
+            $this->Transaction->updateUserTransactionsInit($sessid, ($transactionsInit - $winMoney));
         }
         $this->User->save($user['uid'], $balanceUser);
 
@@ -127,8 +127,7 @@ class GameSpin extends Controller
             'calculBigWin' => 0
         ];
 
-        if ($this->User->saveTransaction($saveTransaction) === FALSE) {
-            $this->Log->e($request['action'] . ' transaction was not saved');
+        if ($this->Transaction->saveTransaction($saveTransaction) === FALSE) {
             return print($this->Error->sendError(0));
         }
         return $response;
@@ -153,7 +152,7 @@ class GameSpin extends Controller
     private function balance5game($sessid)
     {
         $balance5game = 0;
-        $transactions = $this->User->getUserTransactionsSpin($sessid);
+        $transactions = $this->Transaction->getUserTransactionsSpin($sessid);
         foreach ($transactions as $item) {
             $balance5game += $item['balance'];
         }

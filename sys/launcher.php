@@ -1,17 +1,14 @@
 <?php
-require_once "models/User.php";
-require_once "controller/Logger.php";
+require_once 'controller/Controller.php';
 
-class Launcher
+
+class Launcher extends Controller
 {
     private $lang = 'en'; // en, tr
-    private $User;
-    private $Log;
 
     function __construct()
     {
-        $this->User = new User;
-        $this->Log = new Logger;
+        parent::__construct();
     }
 
     public function startGame()
@@ -20,8 +17,8 @@ class Launcher
         $uid = intval($_REQUEST['uid']);
         $gameId = $_REQUEST['gameId'];
 
-        if (!$method || $method != 'start' || !$uid || !$gameId) {
-            return;
+        if (!$method || $method != 'start' || !$uid || !$gameId || !in_array($gameId, $this->gameIdArray)) {
+            return print($this->Error->sendError(0));
         }
         $user = $this->User->getByUid($uid);
 
@@ -33,11 +30,11 @@ class Launcher
         $resetSessions = $this->User->resetSessionStatuses($uid);
 
         if ($resetSessions !== TRUE) {
-            return;
+            return print($this->Error->sendError(0));
         }
         $createSession = $this->User->createSession($uid, $sessid);
         if ($createSession !== TRUE) {
-            return;
+            return print($this->Error->sendError(0));
         }
 
         $startParams = [

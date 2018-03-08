@@ -17,7 +17,7 @@ class Endpoint extends Controller
 
     public function actions()
     {
-        if (empty($_REQUEST['action']) && empty($_REQUEST['sessid']) && empty($_REQUEST['gameId'])) {
+        if (empty($_REQUEST['action']) && empty($_REQUEST['sessid']) && empty($_REQUEST['gameId']) || !in_array($_REQUEST['gameId'], $this->gameIdArray)) {
             return print($this->Error->sendError(0));
         }
         switch ($_REQUEST['action']) {

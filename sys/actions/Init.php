@@ -37,14 +37,13 @@ class Init extends Controller
             'calculBigWin' => $user['balance']
         ];
 
-        if ($this->User->saveTransaction($saveTransaction) === FALSE) {
-            $this->Log->e($request['action'] . ' transaction was not saved');
+        if ($this->Transaction->saveTransaction($saveTransaction) === FALSE) {
             return print($this->Error->sendError(0));
         }
         $initResponse = include('config/' . $gameId . '/init.config.php');
 
-        $initResponse['gamesoundurl'] = 'test';
-        $initResponse['staticsharedurl'] = "http://gaming-soft.info/netent/twinSpin/game/current";
+        $initResponse['gamesoundurl'] = $gameId;
+        $initResponse['staticsharedurl'] = "http://gaming-soft.info/slots/games/' . $gameId . '";
         $initResponse['credit'] = $convertedBalance['cents'];
 
         return print(http_build_query($initResponse));
