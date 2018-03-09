@@ -2,11 +2,13 @@
 
 class Logger
 {
-
     private $log_file;
 
-    function __construct($log_file = "storage/debug.log")
+    function __construct()
     {
+        $gameId = $_REQUEST['gameId'];
+        $log_file = ($gameId) ? '../games/' . $gameId . '/storage/debug.log' : 'storage/debug.log';
+        $log_file = (file_exists($log_file)) ? $log_file : 'storage/debug.log';
 
         date_default_timezone_set('Europe/Kiev');
         $this->log_file = $log_file;
@@ -40,10 +42,21 @@ class Logger
         $this->writeToLog("INFO", $message);
     }
 
+    public function graphic($message)
+    {
+        $this->graphicToLog($message);
+    }
+
     private function writeToLog($status, $message)
     {
         $date = date('[Y-m-d H:i:s]');
         $msg = "$date: [$status] -\n $message" . PHP_EOL;
+        file_put_contents($this->log_file, $msg, FILE_APPEND);
+    }
+
+    private function graphicToLog($message)
+    {
+        $msg = "{\"column\":" . "\"$message\"" . "}," . PHP_EOL;
         file_put_contents($this->log_file, $msg, FILE_APPEND);
     }
 }
