@@ -58,10 +58,10 @@ if (isset($_SESSION['is_logged']) && $_SESSION['logged'] !== FALSE) {
     <? if ($access === TRUE) { ?>
         <? foreach ($users as $user) { ?>
 
-            <h1><a class="start-neon-staxx" target="_blank" href="sys/launcher.php?gameId=neonstaxx_not_mobile&uid=<?= ($user['uid']) ?>&method=start">Neon-staxx <?= ($user['user_name'] . ' - ' . $user['balance'] . $user['playercurrency']) ?></a></h1>
-            <h1><a class="start-pyramid" target="_blank" href="sys/launcher.php?gameId=pyramid_new&uid=<?= ($user['uid']) ?>&method=start">Pyramid <?= ($user['user_name'] . ' - ' . $user['balance'] . $user['playercurrency']) ?></a></h1>
-            <h1><a class="start-twinSpin" target="_blank" href="sys/launcher.php?gameId=twinSpin&uid=<?= ($user['uid']) ?>&method=start">TwinSpin <?= ($user['user_name'] . ' - ' . $user['balance'] . $user['playercurrency']) ?></a></h1>
-			<h1><a class="start-stickers" target="_blank" href="sys/launcher.php?gameId=stickers_not_mobile&uid=<?= ($user['uid']) ?>&method=start">Stickers <?= ($user['user_name'] . ' - ' . $user['balance'] . $user['playercurrency']) ?></a></h1>
+            <h1><a class="start-neon-staxx" target="_blank" href="sys/launcher.php?gameId=neonstaxx_not_mobile&uid=<?= ($user['uid']) ?>&method=start">Neon-staxx <?= ($user['user_name'] . ' - ' . $user['balance'] .' '. $user['playercurrency']) ?></a></h1>
+            <h1><a class="start-pyramid" target="_blank" href="sys/launcher.php?gameId=pyramid_new&uid=<?= ($user['uid']) ?>&method=start">Pyramid <?= ($user['user_name'] . ' - ' . $user['balance'] .' '. $user['playercurrency']) ?></a></h1>
+            <h1><a class="start-twinSpin" target="_blank" href="sys/launcher.php?gameId=twinSpin&uid=<?= ($user['uid']) ?>&method=start">TwinSpin <?= ($user['user_name'] . ' - ' . $user['balance'] .' '. $user['playercurrency']) ?></a></h1>
+			<h1><a class="start-stickers" target="_blank" href="sys/launcher.php?gameId=stickers_not_mobile&uid=<?= ($user['uid']) ?>&method=start">Stickers <?= ($user['user_name'] . ' - ' . $user['balance'] .' '. $user['playercurrency']) ?></a></h1>
 
             </br></br><hr>
 
