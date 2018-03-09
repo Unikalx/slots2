@@ -17,11 +17,6 @@ class User
         $this->Log = new Logger;
     }
 
-    public function test()
-    {
-        return 'testFunction';
-    }
-
     public function getUserBySession($sessid)
     {
         $sql = 'SELECT c.*, us.sessid FROM `users` AS c JOIN `user_sessions` AS us ON c.uid = us.uid WHERE us.sessid=:sessid AND us.status = 1';
