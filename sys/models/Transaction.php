@@ -72,7 +72,7 @@ class Transaction
 
     public function getUserTransactionsInit($sessid)
     {
-        $sql = "SELECT t.calculBigWin FROM `twinspin_transactions` AS t JOIN `twinspin_user_sessions` AS s_user_sess ON t.uid = s_user_sess.uid WHERE t.sessid=:sessid AND s_user_sess.status = 1 AND `action` = 'init' ORDER by t.id DESC Limit 1";
+        $sql = "SELECT t.calculBigWin FROM `twinspin_transactions` AS t JOIN `user_sessions` AS s_user_sess ON t.uid = s_user_sess.uid WHERE t.sessid=:sessid AND s_user_sess.status = 1 AND `action` = 'init' ORDER by t.id DESC Limit 1";
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':sessid', $sessid, PDO::PARAM_STR);
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
@@ -92,7 +92,7 @@ class Transaction
     public function getUserTransactionsSpin($sessid)
     {
         $result = [];
-        $sql = "SELECT t.balance FROM `twinspin_transactions` AS t JOIN `twinspin_user_sessions` AS s_user_sess ON t.uid = s_user_sess.uid WHERE t.sessid= '" . $sessid . "' AND s_user_sess.status = 1 AND `action` = 'spin' ORDER by t.id DESC Limit 5";
+        $sql = "SELECT t.balance FROM `twinspin_transactions` AS t JOIN `user_sessions` AS s_user_sess ON t.uid = s_user_sess.uid WHERE t.sessid= '" . $sessid . "' AND s_user_sess.status = 1 AND `action` = 'spin' ORDER by t.id DESC Limit 5";
         $stmt = $this->db->query($sql);
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
 
