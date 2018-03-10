@@ -8,22 +8,25 @@ class ReloadBalance extends Controller
         parent::__construct();
     }
 
-    public function ReloadBalance($request)
+    public function handle($request)
     {
-        $sessid = $request['sessid'];
-        $user = $this->User->getUserBySession($sessid);
+        $user = $this->User->getBySession($request['sessid']);
 
         if ($user === FALSE) {
+
             return print($this->Error->sendError(20));
+        
         }
+        
         $convertedBalance = $this->MoneyManager->convertBalance($user['balance']);
 
-        $response = [
+        $reloadBalanceResponse = [
+            'clientaction'      => $request['action'],
+            'credit'            => $convertedBalance['cents'],
+            'playercurrency'    => $user['playercurrency'],
             'playercurrencyiso' => $user['playercurrency'],
-            'clientaction' => $request['action'],
-            'playercurrency' => $user['playercurrency'],
-            'credit' => $convertedBalance['cents']
         ];
-        return print(urldecode(http_build_query($response)));
+
+        return print(urldecode(http_build_query($reloadBalanceResponse)));
     }
 }
