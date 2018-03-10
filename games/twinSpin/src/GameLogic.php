@@ -15,7 +15,7 @@ class GameLogic extends Controller
 //    private $superWin;
 //    private $finishWin;
 
-    public $gameSoundUrl = 'http://gaming-soft.info/netent/twinSpin/';
+    public $gameSoundUrl = 'http://gaming-soft.info/slots/games/twinSpin/';
     public $moneyManager;
     public $linkedRand;
 
@@ -114,6 +114,11 @@ class GameLogic extends Controller
             return true;
         }
         if ($num <= -10000 && $betPrice <= $winMoney && $winMoney <= $betPrice * 3) {
+            $check = ($bigWinResult == false) ? 'false' : 'true';
+            $this->Log->e('$betPrice ' . $betPrice);
+            $this->Log->e('$min ' . $min);
+            $this->Log->e('$max ' . $max);
+            $this->Log->e('$check ' . $check);
             return true;
         }
         return false;
@@ -209,12 +214,12 @@ class GameLogic extends Controller
             $weightPrice *= $betBetLevel;
             $totalWinCoins += $weightPrice;
 
-            $weightPriceCent = $this->MoneyManager->convertBalance($weightPrice, $denomination);
-            $totalWinCents += $weightPriceCent['denominBalance'];
+            $weightPriceCent = $this->MoneyManager->changeBalance($weightPrice, $betBetLevel, $denomination, ['sum' => $weightPrice])['totalwinCents'];
+            $totalWinCents += $weightPriceCent;
 
             $arrCoins['ws.i' . $i . '.types.i0.wintype'] = 'coins';
             $arrCoins['ws.i' . $i . '.types.i0.coins'] = $weightPrice;
-            $arrCoins['ws.i' . $i . '.types.i0.cents'] = $weightPriceCent['denominBalance'];
+            $arrCoins['ws.i' . $i . '.types.i0.cents'] = $weightPriceCent;
             $i++;
             $wonCoins = array_merge($wonCoins, $arrCoins);
         }

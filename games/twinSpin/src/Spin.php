@@ -2,7 +2,7 @@
 require_once "GameLogic.php";
 require_once "controller/Controller.php";
 
-class GameSpin extends Controller
+class Spin extends Controller
 {
     private $gameSoundUrl;
     private $GameLogic;
@@ -10,27 +10,26 @@ class GameSpin extends Controller
     function __construct()
     {
         parent::__construct();
-
         $this->GameLogic = new GameLogic;
         $this->gameSoundUrl = $this->GameLogic->gameSoundUrl;
-
         return;
     }
 
-    public function Spin($request)
+    public function handle($request)
     {
         $sessid = $request['sessid'];
         $betDenomination = $request['bet_denomination'];
         $betBetLevel = $request['bet_betlevel'];
+        $gameId = $request['gameId'];
 
-        $user = $this->User->getUserBySession($sessid);
-        if (!$betDenomination || !$betBetLevel || $user === FALSE || !in_array($_REQUEST['gameId'], $this->gameIdArray)) {
-            $this->Log->e($request['action'] . ' bet_denomination or bet_betlevel or user or gameIdArray is false');
+        $user = $this->User->getBySession($sessid);
+        if (!$betDenomination || !$betBetLevel || $user === FALSE || !$gameId) {
+            $this->Log->e($request['action'] . ' bet_denomination or bet_betlevel or user or gameId is false');
             return print($this->Error->sendError(0));
         }
         $betPrice = $this->MoneyManager->setBetLevel($betBetLevel, $betDenomination)['betPrice'];
 
-        $transactionsInit = $this->Transaction->getUserTransactionsInit($sessid)['calculBigWin'];
+        $transactionsInit = $this->Transaction->getUserTransactionsInit($sessid, $gameId)['calculBigWin'];
 
         $diffBalanceWin = $transactionsInit - $user['balance'];
 
@@ -38,7 +37,7 @@ class GameSpin extends Controller
         $megaWin = $this->GameLogic->megaWin * ($betDenomination * 2) * $betBetLevel;
         $bigWinResult = ($bigWin < $diffBalanceWin) ? $this->GameLogic->winPercent() : false;
 
-        $priceWin = $this->priceWin($sessid, $bigWinResult, $bigWin, $megaWin, $betPrice, $diffBalanceWin, $user['balance']);
+        $priceWin = $this->priceWin($sessid, $bigWinResult, $bigWin, $megaWin, $betPrice, $diffBalanceWin, $user['balance'], $gameId);
         $minWin = $priceWin['min'];
         $maxWin = $priceWin['max'];
 
@@ -53,18 +52,20 @@ class GameSpin extends Controller
                 break;
             }
         }
-
         $renderWin = $this->GameLogic->renderWin($weights);
         $positionsWin = $this->GameLogic->positionsWin($renderWin);
         $winCoins = $this->GameLogic->winCoins($renderWin, $betDenomination, $betBetLevel);
 
         $winMoney = ($winCoins['totalwin.cent'] / 100);
-        $balanceUser = $this->MoneyManager->changeBalance(($user['balance'] + $winMoney), $betBetLevel, $betDenomination)['balance'];
+        $changeBalanceUser = $this->MoneyManager->changeBalance(($user['balance'] + $winMoney), $betBetLevel, $betDenomination);
+        $balanceUser = $changeBalanceUser['balance'];
+        $balanceCentsUser = $changeBalanceUser['balanceCents'];
+        $balanceCoinsUser = $changeBalanceUser['balanceCoins'];
 
         $credit = $this->MoneyManager->convertBalance($balanceUser);
 
         if ($bigWinResult == true) {
-            $this->Transaction->updateUserTransactionsInit($sessid, ($transactionsInit - $winMoney));
+            $this->Transaction->updateUserTransactionsInit($sessid, ($balanceUser - $winMoney), $gameId);
         }
         $this->User->save($user['uid'], $balanceUser);
 
@@ -111,31 +112,15 @@ class GameSpin extends Controller
 
         $response = array_merge($positionsWin, $spinArray, $winCoins);
 
-        $saveTransaction = [
-            'uid' => $user['uid'],
-            'sessid' => $sessid,
-            'action' => $request['action'],
-            'bet' => $betPrice,
-            'betlevel' => $betBetLevel,
-            'playerBalanceCents' => ($balanceUser * 100),
-            'playerBalanceCoins' => $this->MoneyManager->convertBalance($balanceUser, $betDenomination)['coins'],
-            'denomination' => $betDenomination,
-            'preCombination' => json_encode($weights),
-            'totalWinCents' => $winCoins['totalwin.cent'],
-            'totalWinCoins' => $winCoins['totalwin.coins'],
-            'balance' => $balanceUser,
-            'calculBigWin' => 0
-        ];
-
-        if ($this->Transaction->saveTransaction($saveTransaction) === FALSE) {
+        if ($this->Transaction->saveTransaction($gameId, $user['uid'], $sessid, $request['action'], $betPrice, $betBetLevel, $balanceCentsUser, $balanceCoinsUser, $betDenomination, json_encode($weights), $winCoins['totalwin.cent'], $winCoins['totalwin.coins'], $balanceUser) === FALSE) {
             return print($this->Error->sendError(0));
         }
-        return $response;
+        return print(urldecode(http_build_query($response)));
     }
 
-    private function priceWin($sessid, $bigWinResult, $bigWin, $megaWin, $betPrice, $diffBalanceWin, $userBalance)
+    private function priceWin($sessid, $bigWinResult, $bigWin, $megaWin, $betPrice, $diffBalanceWin, $userBalance, $gameId)
     {
-        $balance5game = $this->balance5game($sessid);
+        $balance5game = $this->balance5game($sessid, $gameId);
         $balanceDiffPercentage = (($balance5game - $userBalance) / $balance5game) * 100;
 
         $factor = ($balanceDiffPercentage > 15) ? 1.5 : 1;
@@ -149,10 +134,10 @@ class GameSpin extends Controller
         return $priceWin;
     }
 
-    private function balance5game($sessid)
+    private function balance5game($sessid, $gameId)
     {
         $balance5game = 0;
-        $transactions = $this->Transaction->getUserTransactionsSpin($sessid);
+        $transactions = $this->Transaction->getUserTransactionsSpin($sessid, $gameId);
         foreach ($transactions as $item) {
             $balance5game += $item['balance'];
         }
