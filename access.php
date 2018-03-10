@@ -1,12 +1,10 @@
 <?php
-
 ini_set('display_errors', 1);
 error_reporting(E_ALL & ~E_NOTICE);
 
 session_start();    $access = FALSE;
 
 if (isset($_SESSION['is_logged']) && $_SESSION['logged'] !== FALSE) {
-
     $access = TRUE;
 
     $dsn = "mysql:host=localhost;dbname=gamingso_slots_db;charset=utf8";
@@ -19,9 +17,9 @@ if (isset($_SESSION['is_logged']) && $_SESSION['logged'] !== FALSE) {
     $users->setFetchMode(PDO::FETCH_ASSOC);
     $users->execute();
     $users = $users->fetchAll();
-
+} else {
+    header('Location: ../index.php');
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -57,14 +55,12 @@ if (isset($_SESSION['is_logged']) && $_SESSION['logged'] !== FALSE) {
 <body>
     <? if ($access === TRUE) { ?>
         <? foreach ($users as $user) { ?>
-
             <h1><a class="start-neon-staxx" target="_blank" href="sys/launcher.php?gameId=neonstaxx_not_mobile&uid=<?= ($user['uid']) ?>&method=start">Neon-staxx <?= ($user['user_name'] . ' - ' . $user['balance'] .' '. $user['playercurrency']) ?></a></h1>
             <h1><a class="start-pyramid" target="_blank" href="sys/launcher.php?gameId=pyramid_new&uid=<?= ($user['uid']) ?>&method=start">Pyramid <?= ($user['user_name'] . ' - ' . $user['balance'] .' '. $user['playercurrency']) ?></a></h1>
-            <h1><a class="start-twinSpin" target="_blank" href="sys/launcher.php?gameId=twinSpin&uid=<?= ($user['uid']) ?>&method=start">TwinSpin <?= ($user['user_name'] . ' - ' . $user['balance'] .' '. $user['playercurrency']) ?></a></h1>
+            <h1><a class="start-twinSpin" target="_blank" href="sys/launcher.php?gameId=twinspin_not_mobile&uid=<?= ($user['uid']) ?>&method=start">TwinSpin Desktop <?= ($user['user_name'] . ' - ' . $user['balance'] .' '. $user['playercurrency']) ?></a></h1>
+            <h1><a class="start-twinSpin" target="_blank" href="sys/launcher.php?gameId=twinspin_mobile_html&uid=<?= ($user['uid']) ?>&method=start">TwinSpin Mobile <?= ($user['user_name'] . ' - ' . $user['balance'] .' '. $user['playercurrency']) ?></a></h1>
 			<h1><a class="start-stickers" target="_blank" href="sys/launcher.php?gameId=stickers_not_mobile&uid=<?= ($user['uid']) ?>&method=start">Stickers <?= ($user['user_name'] . ' - ' . $user['balance'] .' '. $user['playercurrency']) ?></a></h1>
-
             </br></br><hr>
-
         <? } ?>
     <? } ?>
 </body>
